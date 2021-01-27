@@ -16,7 +16,7 @@
                 <tr>
                      <td scope ="row"> {{ $post->id }} </td>
                      <td>{{ $post->title }}</td>
-                     <td>{{ $post->autor }}</td>
+                     <td>{{ $post->author }}</td>
                      <td> editar | borrar </td>
                 </tr>
                 @endforeach
