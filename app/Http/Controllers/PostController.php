@@ -36,7 +36,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$data = $request ->all();
+        $data = $request->except('_token');
+        post::insert($data);
+        return redirect()->route("post.index");
     }
 
     /**
@@ -56,11 +59,11 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit($id)
     {
-        return view("post.edit");
+        $data = post::findOrFail($id);
+        return view("post.edit")->with(["post" => $data]);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -68,9 +71,14 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        //$data = $request ->all();
+        $data = $request->except('_token','_method');
+        //var_dump($data);
+        //die()
+        post::where('id','=',$id)->update($data);
+        return redirect()->route("post.index");
     }
 
     /**
@@ -79,8 +87,9 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        post::destroy($id);
+        return redirect()->route("post.index");
     }
 }

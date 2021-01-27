@@ -1,30 +1,28 @@
 @extends('base')
-@section('title') Inicio @endsection
+@section('title') Create @endsection
 @section('content')
-    <table class = "table" >
-        <thead>
-            <tr>
-                <th>{{"ID"}}</th>
-                <th>{{"TITLE"}}</th>
-                <th>{{"AUTHOR"}}</th>
-                <th>{{"ACCIONES"}}</th>
-            </tr>
-        </thead>
-         <tbody>
-             @if (count($posts) >= 1)
-                @foreach ($posts as $post)
-                <tr>
-                     <td scope ="row"> {{ $post->id }} </td>
-                     <td>{{ $post->title }}</td>
-                     <td>{{ $post->autor }}</td>
-                     <td> editar | borrar </td>
-                </tr>
-                @endforeach
-             @else
-                <tr>
-                    <td scope "row"> {{ " no encontro resultados" }} </td>
-                </tr>
-             @endif
-         </tbody>
-    </table>
+<form action="{{route('post.store') }}" method="post">
+   {{ csrf_field() }}
+    <div class="mb-3">
+        <label for="title" class="form-label">Titulo</label>
+        <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Imagen</label>
+        <input type="text" class="form-control" id="image" name="image">
+    </div>
+    <div class="mb-3">
+        <label for="summary" class="form-label">Resumen</label>
+        <textarea name="summary" id="summary" cols="30" rows="5"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" name="author">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
 @endsection
