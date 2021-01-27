@@ -1,7 +1,7 @@
 @extends('base')
-@section('title') Inicio @endsection
+@section('title') post @endsection
 @section('content')
-    <nav class="navbar navbar-expand- lg navbar-light hg-ligth">
+    <nav class="navbar navbar-expand-lg navbar-light bg-ligth">
         <div class="container-fluid">
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>{{"ID"}}</th>
+                <th>{{"IMAGE"}}</th>
                 <th>{{"TITLE"}}</th>
                 <th>{{"AUTHOR"}}</th>
                 <th>{{"ACCIONES"}}</th>
@@ -24,6 +25,7 @@
                 @foreach ($posts as $post)
                 <tr>
                      <td scope ="row"> {{ $post->id }} </td>
+                     <td scope ="row"> {{ $post->image }} </td>
                      <td>{{ $post->title }}</td>
                      <td>{{ $post->author }}</td>
                      <td>
