@@ -1,7 +1,16 @@
 @extends('base')
 @section('title') Inicio @endsection
 @section('content')
-    <table class = "table" >
+    <nav class="navbar navbar-expand- lg navbar-light hg-ligth">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="btn btn-sm btn-primary" href="{{ route('post.create') }}"> + Nuevo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<table class = "table" >
         <thead>
             <tr>
                 <th>{{"ID"}}</th>

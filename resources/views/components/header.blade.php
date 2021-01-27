@@ -4,5 +4,4 @@
       <a class="p-2 text-dark" href="{{ route("home") }}">Home</a>
       <a class="p-2 text-dark" href="{{ route("post.index") }}">post</a>
     </nav>
-
   </header>
