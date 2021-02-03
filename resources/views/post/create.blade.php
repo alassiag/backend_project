@@ -1,7 +1,7 @@
 @extends('base')
-@section('title') Create @endsection
+@section('title') Post Create @endsection
 @section('content')
-<form action="{{route('post.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
    {{ csrf_field() }}
     <div class="mb-3">
         <label for="title" class="form-label">Titulo</label>
@@ -13,16 +13,26 @@
     </div>
     <div class="mb-3">
         <label for="summary" class="form-label">Resumen</label>
-        <textarea name="summary" id="summary" cols="30" rows="5"></textarea>
+        <textarea name="summary" id="summary" class="form-control" cols="30" rows="5"></textarea>
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Descripción</label>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
+        <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
     </div>
     <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
+        <label for="author" class="form-label">Autor</label>
         <input type="text" class="form-control" id="author" name="author">
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 @endsection
+
+<!--div class="form-group has-feedback">
+        <label class="form-label">Categoria</label>
+        <select name="category_id" class="form-select" required>
+            <option value="">Seleccione la Categoria</option>
+            foreach($categories as $category)
+                <option value=" {{--}}   {{ $category->id }}" >{{ $category->name }}</option>
+            endforeach   --}}
+        </select>
+    </div-->

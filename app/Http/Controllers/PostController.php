@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,7 +19,17 @@ class PostController extends Controller
         $data['posts'] = Post::paginate(5);
         return view("post.index", $data);
     }
+    public function search(Request $request)
+    {
+        //$data = $request->all();
+        $data = $request->input('search');
+        $query = Post::select()
+        ->where('title','like',"%$data%")
+        ->orwhere('author','like',"%$data%")
+        ->get();
 
+        return view("post.index")->with(["posts" => $query]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,6 +37,7 @@ class PostController extends Controller
      */
     public function create()
     {
+
         return view("post.create");
     }
 
@@ -38,7 +51,10 @@ class PostController extends Controller
     {
         //$data = $request ->all();
         $data = $request->except('_token');
-        post::insert($data);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('uploads','public');
+        }
+        Post::insert($data);
         return redirect()->route("post.index");
     }
 
@@ -61,8 +77,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $data = post::findOrFail($id);
-        return view("post.edit")->with(["post" => $data]);
+
+        $data = Post::findOrFail($id);
+        $categories = Category::all();
+        return view("post.edit")->with(["post" => $data, "categories" => $categories]);
+
     }
     /**
      * Update the specified resource in storage.
@@ -75,9 +94,13 @@ class PostController extends Controller
     {
         //$data = $request ->all();
         $data = $request->except('_token','_method');
-        //var_dump($data);
-        //die()
-        post::where('id','=',$id)->update($data);
+        if ($request->hasFile('image')) {
+            $post = Post::findOrFail($id);
+            Storage::delete("public/$post->image");
+            $data['image'] = $request->file('image')->store('uploads','public');
+        }
+
+        Post::where('id','=',$id)->update($data);
         return redirect()->route("post.index");
     }
 
@@ -89,7 +112,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        post::destroy($id);
+        Post::destroy($id);
         return redirect()->route("post.index");
     }
 }
