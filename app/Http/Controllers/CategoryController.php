@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class CategoryController extends Controller
 {
@@ -14,9 +16,14 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $data = Category::all();
+        return view("category.index".$data);
     }
+    public function list() {
 
+        $data = Category::all();
+        return response()->json(["categories" => $data], 200);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +42,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data $request->except('_token');
+        Category::insert($data);
+        Session::flash('alert-success', "Se ha Creado la Categorías con éxito!' {$data['name']} ");
+        return redirect()->route("category.index");
     }
 
     /**

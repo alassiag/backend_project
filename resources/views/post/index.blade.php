@@ -37,7 +37,7 @@
                 <tr>
                     <td scope ="row"> {{ $post->id }} </td>
                     <!--td scope ="row"> {{-- $post->image --}} </td-->
-                    <td scope ="row"><img src="{{ asset('storage'),'/'.$post.image }}" alt="" width="100"></td>
+                    <td scope ="row"><img src="{{ asset('storage').'/'.$post.image }}" alt="" width="100"></td>
                     <td scope ="row"> {{ $post->category->name }} </td>
 
                     <td>{{ $post->title }}</td>
@@ -54,7 +54,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td scope ="row"> {{ " no encontro resultados" }} </td>
+                    <td scope ="row"> {{ " no se encontraron resultados" }} </td>
                 </tr>
             @endif
         </tbody>

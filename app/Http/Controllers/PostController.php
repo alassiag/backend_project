@@ -19,14 +19,15 @@ class PostController extends Controller
         $data['posts'] = Post::paginate(5);
         return view("post.index", $data);
     }
+
     public function search(Request $request)
     {
         //$data = $request->all();
         $data = $request->input('search');
         $query = Post::select()
-        ->where('title','like',"%$data%")
-        ->orwhere('author','like',"%$data%")
-        ->get();
+            ->where('title','like',"%$data%")
+            ->orwhere('author','like',"%$data%")
+            ->get();
 
         return view("post.index")->with(["posts" => $query]);
     }
@@ -66,9 +67,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
+      /*
+        $data['posts'] = Post::paginate(5);
+        return view("post.index", $data);
 
+    }
+    */
     /**
      * Show the form for editing the specified resource.
      *

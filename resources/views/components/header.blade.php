@@ -13,7 +13,7 @@
         </head>
     <header>
     <nav class="MainNav--bar">
-       <p class="NavBar--title">MundosE ABM first Proyect</p>
+       <p class="NavBar--title">MundosE</p>
        <ul>
          <li>
           <a class="buton--home" href="{{ route("home") }}">Home</a>

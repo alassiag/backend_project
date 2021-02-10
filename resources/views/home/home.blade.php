@@ -1,5 +1,5 @@
 @extends('base')
-@section('title') Inicio @endsection
+@section('title') post @endsection
 @section('content')
 
     <main class="container-fluid">
