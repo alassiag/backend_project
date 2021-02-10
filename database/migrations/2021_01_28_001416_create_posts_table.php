@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use PharIo\Manifest\Author;
+
 
 class CreatePostsTable extends Migration
 {
@@ -23,8 +23,11 @@ class CreatePostsTable extends Migration
             $table->text('description');
             $table->text('author');
             $table->timestamps();
-
             //$table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+        });
+
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

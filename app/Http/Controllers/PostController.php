@@ -70,9 +70,9 @@ class PostController extends Controller
       /*
         $data['posts'] = Post::paginate(5);
         return view("post.index", $data);
-
+      */
     }
-    */
+
     /**
      * Show the form for editing the specified resource.
      *
